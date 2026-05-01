@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MaquisPro — Inscription gratuite 15 jours</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --green:#00b96b;--green2:#009954;--green3:#e6f9f1;--green4:#d0f5e8;
+  --dark:#0e1a14;--dark2:#162010;--dark3:#1e2d1e;
+  --amber:#f5a623;--amber2:#fff8ec;
+  --red:#e74c3c;--red2:#fdecea;
+  --white:#ffffff;--off:#f7f7f3;
+  --gray:#6b7a70;--border:#dde8e2;
+  --font:'Instrument Sans',sans-serif;
+  --display:'Syne',sans-serif;
+  --r:12px;--r2:20px;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font);background:var(--off);color:var(--dark);min-height:100vh;}
+
+/* ── NAV ── */
+nav{background:var(--dark);padding:0 5%;height:60px;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:var(--display);font-size:20px;font-weight:800;color:var(--white);text-decoration:none;}
+.nav-logo span{color:var(--green);}
+.nav-back{font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color 0.2s;}
+.nav-back:hover{color:var(--white);}
+
+/* ── HERO BAND ── */
+.hero-band{background:linear-gradient(135deg,var(--dark2),#0e2a1c);padding:48px 5% 40px;text-align:center;position:relative;overflow:hidden;}
+.hero-band::before{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(0,185,107,0.15),transparent);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,185,107,0.15);border:1px solid rgba(0,185,107,0.3);border-radius:40px;padding:6px 16px;font-size:13px;font-weight:600;color:var(--green);margin-bottom:20px;}
+.hero-band h1{font-family:var(--display);font-size:clamp(28px,5vw,48px);font-weight:800;color:var(--white);letter-spacing:-1.5px;line-height:1.1;margin-bottom:12px;position:relative;}
+.hero-band h1 span{color:var(--green);}
+.hero-band p{font-size:16px;color:rgba(255,255,255,0.55);max-width:480px;margin:0 auto;line-height:1.6;position:relative;}
+
+/* ── AVANTAGES BAND ── */
+.avantages{background:var(--green);padding:16px 5%;}
+.avantages-inner{max-width:900px;margin:0 auto;display:flex;justify-content:center;gap:32px;flex-wrap:wrap;}
+.av-item{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--white);}
+.av-item .icon{font-size:16px;}
+
+/* ── LAYOUT ── */
+.page-layout{max-width:960px;margin:0 auto;padding:40px 20px;display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:start;}
+@media(max-width:768px){.page-layout{grid-template-columns:1fr;}}
+
+/* ── FORMULAIRE ── */
+.form-card{background:var(--white);border-radius:var(--r2);border:1px solid var(--border);overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.06);}
+.form-header{background:var(--dark);padding:24px 28px;}
+.form-header h2{font-family:var(--display);font-size:22px;font-weight:700;color:var(--white);margin-bottom:4px;}
+.form-header p{font-size:13px;color:rgba(255,255,255,0.45);}
+.form-body{padding:28px;}
+
+.form-section{margin-bottom:24px;}
+.form-section-title{font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.form-section-title::after{content:'';flex:1;height:1px;background:var(--border);}
+
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:480px){.form-row{grid-template-columns:1fr;}}
+.fld{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
+.fld:last-child{margin-bottom:0;}
+.fld label{font-size:13px;font-weight:600;color:var(--dark);}
+.fld label .req{color:var(--green);margin-left:2px;}
+.fld input,.fld select,.fld textarea{padding:11px 14px;border:1.5px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;color:var(--dark);background:var(--off);outline:none;transition:all 0.2s;width:100%;}
+.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--green);background:var(--white);box-shadow:0 0 0 3px rgba(0,185,107,0.1);}
+.fld input.error,.fld select.error{border-color:var(--red);background:var(--red2);}
+.fld .hint{font-size:11px;color:var(--gray);margin-top:2px;}
+.fld textarea{resize:vertical;min-height:80px;}
+
+.plan-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+@media(max-width:480px){.plan-grid{grid-template-columns:1fr;}}
+.plan-opt{position:relative;}
+.plan-opt input[type=radio]{position:absolute;opacity:0;width:0;height:0;}
+.plan-label{display:block;padding:12px 10px;border:2px solid var(--border);border-radius:var(--r);cursor:pointer;text-align:center;transition:all 0.2s;background:var(--off);}
+.plan-label .plan-name{font-size:13px;font-weight:700;display:block;margin-bottom:2px;}
+.plan-label .plan-price{font-size:16px;font-weight:800;color:var(--green);font-family:var(--display);}
+.plan-label .plan-period{font-size:10px;color:var(--gray);}
+.plan-opt input:checked + .plan-label{border-color:var(--green);background:var(--green3);}
+.plan-opt.featured .plan-label{position:relative;}
+.plan-opt.featured .plan-label::before{content:'⭐ Populaire';position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--amber);color:var(--dark);font-size:9px;font-weight:700;padding:2px 10px;border-radius:20px;white-space:nowrap;}
+
+.ville-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.ville-opt{position:relative;}
+.ville-opt input[type=radio]{position:absolute;opacity:0;width:0;height:0;}
+.ville-label{display:block;padding:10px 12px;border:2px solid var(--border);border-radius:var(--r);cursor:pointer;font-size:13px;font-weight:500;text-align:center;transition:all 0.2s;background:var(--off);}
+.ville-opt input:checked + .ville-label{border-color:var(--green);background:var(--green3);color:var(--green2);font-weight:700;}
+
+.checkbox-wrap{display:flex;align-items:flex-start;gap:10px;padding:14px;background:var(--green3);border-radius:var(--r);border:1px solid var(--green4);}
+.checkbox-wrap input[type=checkbox]{width:18px;height:18px;flex-shrink:0;margin-top:1px;accent-color:var(--green);}
+.checkbox-wrap label{font-size:13px;color:var(--dark);line-height:1.5;cursor:pointer;}
+.checkbox-wrap label a{color:var(--green);text-decoration:none;font-weight:600;}
+
+.btn-submit{width:100%;padding:16px;background:var(--green);color:var(--white);border:none;border-radius:40px;font-family:var(--display);font-size:17px;font-weight:700;cursor:pointer;transition:all 0.25s;margin-top:20px;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 4px 20px rgba(0,185,107,0.3);}
+.btn-submit:hover{background:var(--green2);transform:translateY(-2px);box-shadow:0 6px 30px rgba(0,185,107,0.4);}
+.btn-submit:disabled{background:#bbb;cursor:not-allowed;transform:none;box-shadow:none;}
+.btn-submit .spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,0.3);border-top-color:var(--white);border-radius:50%;animation:spin 0.8s linear infinite;display:none;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+.form-note{text-align:center;font-size:12px;color:var(--gray);margin-top:14px;line-height:1.6;}
+
+/* ── SUCCÈS ── */
+.success-screen{display:none;padding:40px 28px;text-align:center;}
+.success-icon{width:80px;height:80px;background:var(--green3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 20px;}
+.success-screen h3{font-family:var(--display);font-size:24px;font-weight:800;color:var(--dark);margin-bottom:10px;}
+.success-screen p{font-size:15px;color:var(--gray);line-height:1.6;margin-bottom:24px;}
+.success-steps{background:var(--off);border-radius:var(--r);padding:20px;text-align:left;margin-bottom:24px;}
+.success-steps h4{font-size:13px;font-weight:700;color:var(--dark);margin-bottom:14px;text-transform:uppercase;letter-spacing:0.5px;}
+.s-step{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;}
+.s-step:last-child{margin-bottom:0;}
+.s-num{width:24px;height:24px;background:var(--green);color:var(--white);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;}
+.s-step p{font-size:13px;color:var(--gray);line-height:1.5;}
+.s-step p strong{color:var(--dark);}
+.btn-wa{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:#25D366;color:var(--white);border:none;border-radius:40px;font-family:var(--font);font-size:15px;font-weight:600;cursor:pointer;text-decoration:none;transition:all 0.2s;}
+.btn-wa:hover{background:#1ebe5a;transform:translateY(-1px);}
+
+/* ── SIDEBAR ── */
+.sidebar{display:flex;flex-direction:column;gap:16px;}
+.side-card{background:var(--white);border-radius:var(--r2);border:1px solid var(--border);padding:22px;}
+.side-card h3{font-family:var(--display);font-size:16px;font-weight:700;margin-bottom:14px;letter-spacing:-0.3px;}
+.trial-countdown{background:var(--dark);border-radius:var(--r2);padding:22px;text-align:center;color:var(--white);}
+.trial-countdown .days{font-family:var(--display);font-size:56px;font-weight:800;color:var(--green);line-height:1;}
+.trial-countdown .days-label{font-size:13px;color:rgba(255,255,255,0.5);margin-top:4px;margin-bottom:14px;}
+.trial-bar{height:6px;background:rgba(255,255,255,0.1);border-radius:3px;overflow:hidden;margin-bottom:10px;}
+.trial-bar-fill{height:100%;background:var(--green);border-radius:3px;width:0%;}
+.trial-note{font-size:12px;color:rgba(255,255,255,0.4);}
+.incl-item{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:13px;}
+.incl-item:last-child{margin-bottom:0;}
+.incl-check{width:20px;height:20px;background:var(--green3);color:var(--green2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;}
+.testi-mini{background:var(--off);border-radius:var(--r);padding:14px;}
+.testi-mini p{font-size:13px;color:var(--dark);font-style:italic;line-height:1.6;margin-bottom:10px;}
+.testi-mini .author{font-size:12px;color:var(--gray);font-weight:600;}
+.contact-option{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--border);border-radius:var(--r);margin-bottom:10px;text-decoration:none;color:var(--dark);transition:all 0.2s;}
+.contact-option:hover{border-color:var(--green);background:var(--green3);}
+.contact-option:last-child{margin-bottom:0;}
+.contact-option .co-icon{font-size:22px;}
+.contact-option .co-text .co-label{font-size:12px;color:var(--gray);font-weight:500;}
+.contact-option .co-text .co-val{font-size:13px;font-weight:600;}
+
+/* ── ERREUR CHAMP ── */
+.field-error{font-size:12px;color:var(--red);margin-top:4px;display:none;}
+
+/* ── FOOTER MINI ── */
+.footer-mini{text-align:center;padding:30px 20px;font-size:12px;color:var(--gray);}
+.footer-mini a{color:var(--green);text-decoration:none;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Maquis<span>Pro</span></a>
+  <a href="index.html" class="nav-back">← Retour à l'accueil</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero-band">
+  <div class="hero-badge">🎉 15 jours d'essai gratuit — sans engagement</div>
+  <h1>Démarrez votre<br><span>essai gratuit</span></h1>
+  <p>Remplissez ce formulaire. Nous vous contactons sous 24h pour configurer votre maquis.</p>
+</div>
+
+<!-- AVANTAGES -->
+<div class="avantages">
+  <div class="avantages-inner">
+    <div class="av-item"><span class="icon">✓</span> Aucune carte bancaire</div>
+    <div class="av-item"><span class="icon">✓</span> Configuration en 1h</div>
+    <div class="av-item"><span class="icon">✓</span> Support WhatsApp inclus</div>
+    <div class="av-item"><span class="icon">✓</span> Annulation libre</div>
+  </div>
+</div>
+
+<!-- LAYOUT -->
+<div class="page-layout">
+
+  <!-- FORMULAIRE -->
+  <div class="form-card">
+    <div class="form-header">
+      <h2>📋 Formulaire d'inscription</h2>
+      <p>Toutes les informations sont confidentielles</p>
+    </div>
+    <div class="form-body" id="form-body">
+
+      <!-- SECTION 1 : Votre maquis -->
+      <div class="form-section">
+        <div class="form-section-title">🍻 Votre maquis</div>
+        <div class="fld">
+          <label>Nom du maquis <span class="req">*</span></label>
+          <input type="text" id="nom-maquis" placeholder="ex: Maquis Chez Adjoua" />
+          <span class="field-error" id="err-nom-maquis">Ce champ est obligatoire</span>
+        </div>
+        <div class="fld">
+          <label>Ville / Quartier <span class="req">*</span></label>
+        </div>
+        <div class="ville-grid">
+          <div class="ville-opt"><input type="radio" name="ville" id="v1" value="Yopougon" checked><label class="ville-label" for="v1">🏘 Yopougon</label></div>
+          <div class="ville-opt"><input type="radio" name="ville" id="v2" value="Cocody"><label class="ville-label" for="v2">🏙 Cocody</label></div>
+          <div class="ville-opt"><input type="radio" name="ville" id="v3" value="Marcory"><label class="ville-label" for="v3">🌆 Marcory</label></div>
+          <div class="ville-opt"><input type="radio" name="ville" id="v4" value="Abobo"><label class="ville-label" for="v4">🏘 Abobo</label></div>
+          <div class="ville-opt"><input type="radio" name="ville" id="v5" value="Adjamé"><label class="ville-label" for="v5">🏬 Adjamé</label></div>
+          <div class="ville-opt"><input type="radio" name="ville" id="v6" value="Autre"><label class="ville-label" for="v6">📍 Autre ville</label></div>
+        </div>
+        <div class="fld" id="autre-ville-wrap" style="display:none;margin-top:10px;">
+          <label>Précisez votre ville</label>
+          <input type="text" id="autre-ville" placeholder="ex: Bouaké, Daloa..." />
+        </div>
+      </div>
+
+      <!-- SECTION 2 : Vos coordonnées -->
+      <div class="form-section">
+        <div class="form-section-title">👤 Vos coordonnées</div>
+        <div class="form-row">
+          <div class="fld">
+            <label>Votre prénom <span class="req">*</span></label>
+            <input type="text" id="prenom" placeholder="ex: Adjoua" />
+            <span class="field-error" id="err-prenom">Ce champ est obligatoire</span>
+          </div>
+          <div class="fld">
+            <label>Votre nom <span class="req">*</span></label>
+            <input type="text" id="nom" placeholder="ex: Koné" />
+            <span class="field-error" id="err-nom">Ce champ est obligatoire</span>
+          </div>
+        </div>
+        <div class="fld">
+          <label>Numéro WhatsApp <span class="req">*</span></label>
+          <input type="tel" id="telephone" placeholder="ex: 07 00 00 00 00" />
+          <span class="hint">Nous vous enverrons votre accès sur ce numéro</span>
+          <span class="field-error" id="err-telephone">Entrez un numéro valide</span>
+        </div>
+        <div class="fld">
+          <label>Email (facultatif)</label>
+          <input type="email" id="email" placeholder="ex: adjoua@gmail.com" />
+        </div>
+      </div>
+
+      <!-- SECTION 3 : Votre activité -->
+      <div class="form-section">
+        <div class="form-section-title">📊 Votre activité</div>
+        <div class="form-row">
+          <div class="fld">
+            <label>Nombre d'articles vendus</label>
+            <select id="nb-articles">
+              <option value="moins10">Moins de 10 articles</option>
+              <option value="10-20" selected>10 à 20 articles</option>
+              <option value="20-50">20 à 50 articles</option>
+              <option value="plus50">Plus de 50 articles</option>
+            </select>
+          </div>
+          <div class="fld">
+            <label>Avez-vous des gérants ?</label>
+            <select id="nb-gerants">
+              <option value="0">Non, je gère seul</option>
+              <option value="1" selected>Oui, 1 gérant</option>
+              <option value="2">Oui, 2 gérants</option>
+              <option value="3+">3 gérants ou plus</option>
+            </select>
+          </div>
+        </div>
+        <div class="fld">
+          <label>Avez-vous des besoins particuliers ?</label>
+          <textarea id="besoins" placeholder="ex: Je vends aussi de la nourriture, j'ai besoin de gérer les crédits clients..."></textarea>
+        </div>
+      </div>
+
+      <!-- SECTION 4 : Plan -->
+      <div class="form-section">
+        <div class="form-section-title">💳 Choisissez votre plan</div>
+        <p style="font-size:13px;color:var(--gray);margin-bottom:14px;">Après vos 15 jours gratuits, quel plan vous intéresse ?</p>
+        <div class="plan-grid">
+          <div class="plan-opt">
+            <input type="radio" name="plan" id="plan1" value="Démarrage - 5000 FCFA/mois">
+            <label class="plan-label" for="plan1">
+              <span class="plan-name">Démarrage</span>
+              <span class="plan-price">5 000 F</span>
+              <span class="plan-period">/mois</span>
+            </label>
+          </div>
+          <div class="plan-opt featured">
+            <input type="radio" name="plan" id="plan2" value="Professionnel - 8000 FCFA/mois" checked>
+            <label class="plan-label" for="plan2">
+              <span class="plan-name">Professionnel</span>
+              <span class="plan-price">8 000 F</span>
+              <span class="plan-period">/mois</span>
+            </label>
+          </div>
+          <div class="plan-opt">
+            <input type="radio" name="plan" id="plan3" value="Annuel - 80000 FCFA/an">
+            <label class="plan-label" for="plan3">
+              <span class="plan-name">Annuel</span>
+              <span class="plan-price">80 000 F</span>
+              <span class="plan-period">/an 🎁</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONDITIONS -->
+      <div class="checkbox-wrap">
+        <input type="checkbox" id="cgv" />
+        <label for="cgv">J'accepte que MaquisPro utilise mes informations pour créer mon espace de gestion et me contacter. <a href="#">Politique de confidentialité</a></label>
+      </div>
+      <span class="field-error" id="err-cgv">Vous devez accepter les conditions</span>
+
+      <button class="btn-submit" id="btn-submit" onclick="soumettreFormulaire()">
+        <span id="btn-text">🚀 Envoyer ma demande d'inscription</span>
+        <span class="spinner" id="btn-spinner"></span>
+      </button>
+      <p class="form-note">Vous serez contacté sous <strong>24h</strong> par WhatsApp pour activer votre essai gratuit de 15 jours 🎉</p>
+    </div>
+
+    <!-- ÉCRAN SUCCÈS -->
+    <div class="success-screen" id="success-screen">
+      <div class="success-icon">🎉</div>
+      <h3>Demande envoyée !</h3>
+      <p>Merci <strong id="success-prenom"></strong> ! Nous avons bien reçu votre inscription pour <strong id="success-maquis"></strong>.<br>Vous serez contacté sous 24h.</p>
+      <div class="success-steps">
+        <h4>Ce qui se passe maintenant</h4>
+        <div class="s-step">
+          <div class="s-num">1</div>
+          <p><strong>Dans les 24h</strong> — Grégoire vous appelle sur WhatsApp pour confirmer votre inscription</p>
+        </div>
+        <div class="s-step">
+          <div class="s-num">2</div>
+          <p><strong>Configuration</strong> — On entre vos articles, vos prix, vos mots de passe dans l'application</p>
+        </div>
+        <div class="s-step">
+          <div class="s-num">3</div>
+          <p><strong>Formation 30 min</strong> — On vous montre comment utiliser MaquisPro</p>
+        </div>
+        <div class="s-step">
+          <div class="s-num">4</div>
+          <p><strong>C'est parti !</strong> — Vos <strong>15 jours gratuits</strong> commencent dès l'activation</p>
+        </div>
+      </div>
+      <a href="https://wa.me/2250556739395?text=Bonjour%20Gr%C3%A9goire%2C%20je%20viens%20de%20m%27inscrire%20sur%20MaquisPro%20!" target="_blank" class="btn-wa">
+        💬 Écrire sur WhatsApp maintenant
+      </a>
+      <p style="font-size:12px;color:var(--gray);margin-top:14px;">Ou attendez notre appel dans les 24h</p>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <!-- Compte à rebours essai -->
+    <div class="trial-countdown">
+      <div class="days">15</div>
+      <div class="days-label">jours d'essai gratuit</div>
+      <div class="trial-bar"><div class="trial-bar-fill" style="width:100%;"></div></div>
+      <div class="trial-note">Aucune carte bancaire requise</div>
+    </div>
+
+    <!-- Ce qui est inclus -->
+    <div class="side-card">
+      <h3>✅ Ce qui est inclus</h3>
+      <div class="incl-item"><div class="incl-check">✓</div><span>Caisse enregistreuse digitale</span></div>
+      <div class="incl-item"><div class="incl-check">✓</div><span>Gestion du stock en temps réel</span></div>
+      <div class="incl-item"><div class="incl-check">✓</div><span>Tableau de bord des ventes</span></div>
+      <div class="incl-item"><div class="incl-check">✓</div><span>Gestion des dépenses</span></div>
+      <div class="incl-item"><div class="incl-check">✓</div><span>Historique multi-jours</span></div>
+      <div class="incl-item"><div class="incl-check">✓</div><span>Impression de reçus</span></div>
+      <div class="incl-item"><div class="incl-check">✓</div><span>Accès Patron + Gérant</span></div>
+      <div class="incl-item"><div class="incl-check">✓</div><span>Support WhatsApp 7j/7</span></div>
+      <div class="incl-item"><div class="incl-check">✓</div><span>Formation incluse</span></div>
+    </div>
+
+    <!-- Témoignage -->
+    <div class="side-card">
+      <h3>💬 Ce qu'ils disent</h3>
+      <div class="testi-mini">
+        <p>"J'ai commencé l'essai gratuit et je n'ai plus voulu m'arrêter. Mon maquis est enfin bien géré !"</p>
+        <div class="author">— Kouassi B., Bar Le Tranquille · Cocody</div>
+      </div>
+    </div>
+
+    <!-- Contact direct -->
+    <div class="side-card">
+      <h3>📞 Une question ?</h3>
+      <a href="https://wa.me/2250556739395" target="_blank" class="contact-option">
+        <span class="co-icon">💬</span>
+        <div class="co-text">
+          <div class="co-label">WhatsApp direct</div>
+          <div class="co-val">05 56 73 93 95</div>
+        </div>
+      </a>
+      <a href="mailto:gregoirevalerybalou@gmail.com" class="contact-option">
+        <span class="co-icon">📧</span>
+        <div class="co-text">
+          <div class="co-label">Email</div>
+          <div class="co-val">gregoirevalerybalou@gmail.com</div>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer-mini">
+  <a href="index.html">← Retour à l'accueil MaquisPro</a> &nbsp;·&nbsp; © 2025 MaquisPro 🇨🇮
+</div>
+
+<script>
+// Afficher champ autre ville
+document.querySelectorAll('input[name="ville"]').forEach(r=>{
+  r.addEventListener('change',()=>{
+    document.getElementById('autre-ville-wrap').style.display = r.value==='Autre'&&r.checked?'block':'none';
+  });
+});
+
+// Validation
+function valider(){
+  let ok=true;
+  const champs=[
+    {id:'nom-maquis',err:'err-nom-maquis'},
+    {id:'prenom',err:'err-prenom'},
+    {id:'nom',err:'err-nom'},
+    {id:'telephone',err:'err-telephone'},
+  ];
+  champs.forEach(c=>{
+    const el=document.getElementById(c.id);
+    const err=document.getElementById(c.err);
+    if(!el.value.trim()){
+      el.classList.add('error');
+      err.style.display='block';
+      ok=false;
+    } else {
+      el.classList.remove('error');
+      err.style.display='none';
+    }
+  });
+  // Téléphone
+  const tel=document.getElementById('telephone').value.replace(/\s/g,'');
+  if(tel && (tel.length<8)){
+    document.getElementById('telephone').classList.add('error');
+    document.getElementById('err-telephone').style.display='block';
+    ok=false;
+  }
+  // CGV
+  const cgv=document.getElementById('cgv');
+  const errCgv=document.getElementById('err-cgv');
+  if(!cgv.checked){
+    errCgv.style.display='block';
+    ok=false;
+  } else {
+    errCgv.style.display='none';
+  }
+  return ok;
+}
+
+function getVille(){
+  const v=document.querySelector('input[name="ville"]:checked');
+  if(!v) return '';
+  if(v.value==='Autre') return document.getElementById('autre-ville').value||'Autre';
+  return v.value;
+}
+
+function getPlan(){
+  const p=document.querySelector('input[name="plan"]:checked');
+  return p?p.value:'Non sélectionné';
+}
+
+async function soumettreFormulaire(){
+  if(!valider()) return;
+
+  const btn=document.getElementById('btn-submit');
+  const btnText=document.getElementById('btn-text');
+  const spinner=document.getElementById('btn-spinner');
+  btn.disabled=true;
+  btnText.textContent='Envoi en cours...';
+  spinner.style.display='block';
+
+  const data={
+    nomMaquis: document.getElementById('nom-maquis').value.trim(),
+    ville: getVille(),
+    prenom: document.getElementById('prenom').value.trim(),
+    nom: document.getElementById('nom').value.trim(),
+    telephone: document.getElementById('telephone').value.trim(),
+    email: document.getElementById('email').value.trim()||'Non renseigné',
+    nbArticles: document.getElementById('nb-articles').value,
+    nbGerants: document.getElementById('nb-gerants').value,
+    besoins: document.getElementById('besoins').value.trim()||'Aucun besoin particulier',
+    plan: getPlan(),
+    date: new Date().toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'})
+  };
+
+  // Message WhatsApp pour Grégoire
+  const msgWA = `🆕 *NOUVELLE INSCRIPTION MAQUISISPRO*
+
+🍻 *Maquis :* ${data.nomMaquis}
+📍 *Ville :* ${data.ville}
+
+👤 *Contact :*
+• Nom : ${data.prenom} ${data.nom}
+• WhatsApp : ${data.telephone}
+• Email : ${data.email}
+
+📊 *Activité :*
+• Articles : ${data.nbArticles}
+• Gérants : ${data.nbGerants}
+• Besoins : ${data.besoins}
+
+💳 *Plan choisi :* ${data.plan}
+
+📅 *Date :* ${data.date}
+
+_À contacter sous 24h pour activer l'essai gratuit._`;
+
+  // Ouvrir WhatsApp avec le message (notification pour Grégoire)
+  const waURL=`https://wa.me/2250556739395?text=${encodeURIComponent(msgWA)}`;
+
+  // Envoyer aussi par email via mailto
+  const emailSujet=`[MaquisPro] Nouvelle inscription - ${data.nomMaquis} - ${data.prenom} ${data.nom}`;
+  const emailCorps=`Nouvelle inscription MaquisPro\n\n`+
+    `Maquis : ${data.nomMaquis}\n`+
+    `Ville : ${data.ville}\n`+
+    `Nom : ${data.prenom} ${data.nom}\n`+
+    `Téléphone : ${data.telephone}\n`+
+    `Email : ${data.email}\n`+
+    `Articles : ${data.nbArticles}\n`+
+    `Gérants : ${data.nbGerants}\n`+
+    `Besoins : ${data.besoins}\n`+
+    `Plan : ${data.plan}\n`+
+    `Date : ${data.date}`;
+
+  // Simuler délai d'envoi
+  await new Promise(r=>setTimeout(r,1500));
+
+  // Afficher succès
+  btn.disabled=false;
+  spinner.style.display='none';
+  document.getElementById('form-body').style.display='none';
+  document.getElementById('success-screen').style.display='block';
+  document.getElementById('success-prenom').textContent=data.prenom;
+  document.getElementById('success-maquis').textContent=data.nomMaquis;
+
+  // Ouvrir WhatsApp automatiquement après 1s
+  setTimeout(()=>{
+    window.open(waURL,'_blank');
+    // Puis email
+    setTimeout(()=>{
+      window.location.href=`mailto:gregoirevalerybalou@gmail.com?subject=${encodeURIComponent(emailSujet)}&body=${encodeURIComponent(emailCorps)}`;
+    },2000);
+  },1000);
+}
+
+// Enlever erreur au focus
+document.querySelectorAll('input,select,textarea').forEach(el=>{
+  el.addEventListener('focus',()=>{
+    el.classList.remove('error');
+    const errId='err-'+el.id;
+    const err=document.getElementById(errId);
+    if(err) err.style.display='none';
+  });
+});
+</script>
+</body>
+</html>
